@@ -57,7 +57,10 @@ def question_answer(question, text):
         answer = "The answer to your question couldnt be found. Please try again"
     print("\nAnswer:\n{}".format(answer.capitalize()))
 
-text = "The journey to the centre of the earth is 640 miles. This fact is fake since it is just a made up fact. The thing that lies beneath the floor is a tortoise. Tortoises have a cute and soft shell."
+#This reads the data from the text file
+with open ("text.txt","r") as f:
+    text=f.read()
+
 flag = True
 while flag:
   print("Ask any question or enter q to exit")

@@ -1,3 +1,4 @@
+from tkinter import TRUE
 import torch
 # from transformers import BertForQuestionAnswering 
 # from transformers import BertTokenizer
@@ -54,5 +55,16 @@ def question_answer(question, text):
          
     if answer.startswith("[CLS]"):
         answer = "The answer to your question couldnt be found. Please try again"
+    print("\nAnswer:\n{}".format(answer.capitalize()))
 
+text = "The journey to the centre of the earth is 640 miles. This fact is fake since it is just a made up fact. The thing that lies beneath the floor is a tortoise. Tortoises have a cute and soft shell."
+flag = True
+while flag:
+  print("Ask any question or enter q to exit")
+  question = input("Please enter your question: \n")
+  if(question=='q'): 
+    print("Thanks for Talking to Peepo, See You Soon")
+    flag=False
+  else:
+    question_answer(question, text)
 

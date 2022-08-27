@@ -25,26 +25,31 @@ open_file.close()
 
 
 def question_answer(question, text):
+    
     #tokenize question and text as a pair
     input_ids = tokenizer.encode(question, text)
+    
     #string version of tokenized ids
     tokens = tokenizer.convert_ids_to_tokens(input_ids)
     
     #segment IDs
     #first occurence of [SEP] token
-    sep_idx = input_ids.index(tokenizer.sep_token_id)    #number of tokens in segment A (question)
-    num_seg_a = sep_idx+1    #number of tokens in segment B (text)
+    sep_idx = input_ids.index(tokenizer.sep_token_id)
+    #number of tokens in segment A (question)
+    num_seg_a = sep_idx+1
+    #number of tokens in segment B (text)
     num_seg_b = len(input_ids) - num_seg_a
+    
     #list of 0s and 1s for segment embeddings
-    segment_ids = [0]*num_seg_a + [1]*num_seg_b    
+    segment_ids = [0]*num_seg_a + [1]*num_seg_b
     assert len(segment_ids) == len(input_ids)
     
     #model output using input_ids and segment_ids
     output = model(torch.tensor([input_ids]), token_type_ids=torch.tensor([segment_ids]))
-
+    
     #reconstructing the answer
     answer_start = torch.argmax(output.start_logits)
-    answer_end = torch.argmax(output.end_logits)    
+    answer_end = torch.argmax(output.end_logits)
     if answer_end >= answer_start:
         answer = tokens[answer_start]
         for i in range(answer_start+1, answer_end+1):
@@ -52,10 +57,12 @@ def question_answer(question, text):
                 answer += tokens[i][2:]
             else:
                 answer += " " + tokens[i]
-         
-    if answer.startswith("[CLS]"):
-        answer = "The answer to your question couldnt be found. Please try again"
-    print("\nAnswer:\n{}".format(answer.capitalize()))
+                
+    # if answer.startswith("[CLS]"):
+    else:
+        answer = "Unable to find the answer to your question."
+    
+    print("\nPredicted answer:\n{}".format(answer.capitalize()))
 
 #This reads the data from the text file
 with open ("text.txt","r") as f:
@@ -63,9 +70,9 @@ with open ("text.txt","r") as f:
 
 flag = True
 while flag:
-  print("Ask any question or enter q to exit")
+  print("Ask any question or simply enter q to exit")
   question = input("Please enter your question: \n")
-  if(question=='q'): 
+  if(question=='q' or 'Q'): 
     print("Thanks for Talking to Peepo, See You Soon")
     flag=False
   else:

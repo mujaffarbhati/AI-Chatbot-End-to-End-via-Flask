@@ -21,18 +21,7 @@ else:
      app.config['SQLALCHEMY_DATABASE_URI'] = params["prod_uri"]
 db = SQLAlchemy(app)
 
-
-class Contact(db.Model):
-    '''
-    sno, name phone_num, msg, date, email
-    '''
-    sno = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    phone_num = db.Column(db.String(12), nullable=False)
-    msg = db.Column(db.String(120), nullable=False)
-    date = db.Column(db.String(12), nullable=True)
-    email = db.Column(db.String(20), nullable=False)
-
+#to be removed 
 class Post(db.Model):
     '''
     sno,title,slug,content,date

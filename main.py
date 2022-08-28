@@ -61,20 +61,10 @@ def question_answer(question, text):
     # if answer.startswith("[CLS]"):
     else:
         answer = "Unable to find the answer to your question."
+    return answer
     
     print("\nPredicted answer:\n{}".format(answer.capitalize()))
 
-#This reads the data from the text file
-with open ("text.txt","r") as f:
-    text=f.read()
 
-flag = True
-while flag:
-  print("Ask any question or simply enter q to exit")
-  question = input("Please enter your question: \n")
-  if(question=='q' or 'Q'): 
-    print("Thanks for Talking to Peepo, See You Soon")
-    flag=False
-  else:
-    question_answer(question, text)
+
 

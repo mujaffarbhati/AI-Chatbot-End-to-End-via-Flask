@@ -7,8 +7,18 @@ import json
 import os
 from werkzeug.utils import secure_filename
 import math
+import main
 with open("config.json","r") as c:
     params=json.load(c)["params"]
+
+
+with open ("text.txt","r") as f:
+    text=f.read()
+# s=main.question_answer(a,text)
+# print(s)
+def chatbot_response(usertext):
+    s=main.question_answer(usertext,text)
+    return s.capitalize()
 
 app = Flask(__name__)
 app.secret_key="super-secret-key"
@@ -41,8 +51,11 @@ def home():
 
 @app.route("/textchat")
 def textchat():
-
     return render_template('textchat.html', params=params)
+@app.route("/textchat/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    return chatbot_response(userText)
 
 
 #for signup page aka dashboard

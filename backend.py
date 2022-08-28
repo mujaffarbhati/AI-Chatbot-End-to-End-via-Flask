@@ -39,6 +39,12 @@ def home():
 
     return render_template('index.html', params=params)
 
+@app.route("/textchat")
+def textchat():
+
+    return render_template('textchat.html', params=params)
+
+
 #for signup page aka dashboard
 #inorder to get values from the html file adde the name thing in the form section so that value can be retrieved
 @app.route("/dashboard", methods=["GET","POST"])

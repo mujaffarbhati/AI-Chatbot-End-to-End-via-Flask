@@ -3,12 +3,13 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Chatbot</title>
+  <title>AI-Chatbot</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/static/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="icon" href="../static/assets/favicon.ico">
 </head>
 
 <body>
@@ -18,13 +19,13 @@
       <div class="msger-header-title">
 
         <i class="fas fa-bug"></i> Chatbot <i class="fas fa-bug"></i>
-        <a href="/"><i class="fas fa-times"></i></a>
+        <a href="/"><i class="fas fa-times" style="right:0;position:relative;display:block;float:right;"></i></a>
       </div>
     </header>
 
     <main class="msger-chat">
       <div class="msg left-msg">
-        <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
+        <div class="msg-img" style="background-image: url(../static/assets/img/roboprofile.jpg)"></div>
 
         <div class="msg-bubble">
           <div class="msg-info">
@@ -41,7 +42,7 @@
     </main>
 
     <form class="msger-inputarea">
-      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+      <input type="text" class="msger-input" id="textInput" placeholder="Speak or Type your message...">
       <button type="button" class="msger-send-btn" onclick="startVoice()">Voice</button>
       <button type="submit" class="msger-send-btn" style="display:none" id="sendBtn">Send</button>
       <button type="button" class="msger-send-btn" onclick="clearInput()">Clear</button>

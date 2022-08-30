@@ -97,7 +97,7 @@
     function botResponse(rawText) {
 
       // Bot Response
-      $.get("/chat/get", { msg: rawText }).done(function (data) {
+      $.get("/voicechat/get", { msg: rawText }).done(function (data) {
         console.log(rawText);
         console.log(data);
         const msgText = data;

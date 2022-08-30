@@ -63,13 +63,10 @@ def get_bot_response():
 @app.route("/dashboard", methods=["GET","POST"])
 def dashboard():
     if request.method=="POST":
-            # if len(request.form["content"])>0:\
-            print(type(request.form))
             if "content" in request.form:
                 with open("text.txt","w")as f:
                     f.write(request.form["content"])
             else:
-                print("INSIDE POST")
                 username = request.form.get("uname")
                 userpass = request.form.get("pass")
                 if username==params['admin_user'] and userpass==params['admin_password']:
@@ -92,9 +89,9 @@ def dashboard():
 #this is for voicechat
 @app.route("/voicechat")
 def voice():
-    return render_template("voicechat.htm", params=params)
+    return render_template("voicechat.html", params=params)
 @app.route("/voicechat/get")
-def get_bot_response():
+def get_bot_response2():
     userText = request.args.get('msg')
     return chatbot_response(userText)
 

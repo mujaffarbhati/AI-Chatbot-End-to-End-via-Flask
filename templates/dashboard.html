@@ -18,23 +18,21 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                   <hr>
-                  </form>
+                
                     <h1>Edit Posts</h1>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th>S.no</th>
-                            <th>Data-Test</th>
-                        {% for post in posts %}
-                          <tr>
-                            <td>{{post.sno}}</td>
-                            <td>{{post.title}}</td>
-                            <td><a href ="/edit/{{post.sno}}"> <button class="btn btn-primary">Edit</button></a></td>
-                            <td><a href ="/delete/{{post.sno}}"> <button class="btn btn-primary">Delete</button></a></td>
-                          </tr>
-                          {% endfor %}
+              
+                        <form method="POST">
+                            <div class="control-group">
+                              <div class="form-group floating-label-form-group controls">
+                                <label>Data For the Bot</label>
+                                <textarea rows="5"  class="form-control" placeholder="Text" name = "content" id="content" required data-validation-required-message="Please enter a message.">{{params["dataset"]}}</textarea>
+                                <p class="help-block text-danger"></p>
+                              </div>
+                            <button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">Save</button>
+                                </div>
+                        </form>
+              
  
-
 
                         </tbody>
                       </table>      

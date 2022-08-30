@@ -32,16 +32,16 @@ else:
 db = SQLAlchemy(app)
 
 #to be removed 
-class Post(db.Model):
-    '''
-    sno,title,slug,content,date
-    '''
-    sno = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), nullable=False)
-    tagline = db.Column(db.String(80), nullable=False)
-    slug = db.Column(db.String(35), nullable=False)
-    content = db.Column(db.String(300), nullable=False)
-    date = db.Column(db.String(12), nullable=True)
+# class Post(db.Model):
+#     '''
+#     sno,title,slug,content,date
+#     '''
+#     sno = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(80), nullable=False)
+#     tagline = db.Column(db.String(80), nullable=False)
+#     slug = db.Column(db.String(35), nullable=False)
+#     content = db.Column(db.String(300), nullable=False)
+#     date = db.Column(db.String(12), nullable=True)
 
 #this is for index page
 @app.route("/")
@@ -62,32 +62,43 @@ def get_bot_response():
 #inorder to get values from the html file adde the name thing in the form section so that value can be retrieved
 @app.route("/dashboard", methods=["GET","POST"])
 def dashboard():
-    #this is to check if the user is already pre loggined in the website
-    if "user" in session and session['user']==params['admin_user']:
-        posts = Post.query.all() #for fetching all the posts
-        return render_template("dashboard.html", params=params, posts=posts)
-
     if request.method=="POST":
-        username = request.form.get("uname")
-        userpass = request.form.get("pass")
-        if username==params['admin_user'] and userpass==params['admin_password']:
-            # set the session variable
-            session['user']=username
-            posts = Post.query.all()
-            return render_template("dashboard.html", params=params, posts=posts)
+            # if len(request.form["content"])>0:\
+            print(type(request.form))
+            if "content" in request.form:
+                with open("text.txt","w")as f:
+                    f.write(request.form["content"])
+            else:
+                print("INSIDE POST")
+                username = request.form.get("uname")
+                userpass = request.form.get("pass")
+                if username==params['admin_user'] and userpass==params['admin_password']:
+                    # set the session variable
+                    session['user']=username
+                    with open("text.txt","r") as f:
+                        data=f.read()
+                        params["dataset"]=data
+                    return render_template("dashboard.html", params=params)
+            # data = request.form.get();
+    if "user" in session and session['user']==params['admin_user']:
+        with open("text.txt","r") as f:
+            data=f.read()
+            params["dataset"]=data
+        return render_template("dashboard.html", params=params)
     else:
         return render_template("login.html", params=params)
 
 
+#this is for voicechat
+@app.route("/voicechat")
+def voice():
+    return render_template("voicechat.htm", params=params)
+@app.route("/voicechat/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    return chatbot_response(userText)
 
-#this is for having a logout out of the site
-@app.route("/delete/<string:sno>" , methods=['GET', 'POST'])
-def delete(sno):
-    if "user" in session and session['user']==params['admin_user']:
-        post = Post.query.filter_by(sno=sno).first()
-        db.session.delete(post)
-        db.session.commit()
-    return redirect("/dashboard")
+
 
 #this is for deleteing the post 
 @app.route('/logout')

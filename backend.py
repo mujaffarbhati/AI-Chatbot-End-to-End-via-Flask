@@ -11,11 +11,13 @@ import main
 with open("config.json","r") as c:
     params=json.load(c)["params"]
 
-
+#this will read the data file and will save it as text
 with open ("text.txt","r") as f:
     text=f.read()
 # s=main.question_answer(a,text)
 # print(s)
+
+#this is just an extention since we were getting 1 input from the form in the files
 def chatbot_response(usertext):
     s=main.question_answer(usertext,text)
     return s.capitalize()
@@ -31,27 +33,16 @@ else:
      app.config['SQLALCHEMY_DATABASE_URI'] = params["prod_uri"]
 db = SQLAlchemy(app)
 
-#to be removed 
-# class Post(db.Model):
-#     '''
-#     sno,title,slug,content,date
-#     '''
-#     sno = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(80), nullable=False)
-#     tagline = db.Column(db.String(80), nullable=False)
-#     slug = db.Column(db.String(35), nullable=False)
-#     content = db.Column(db.String(300), nullable=False)
-#     date = db.Column(db.String(12), nullable=True)
-
 #this is for index page
 @app.route("/")
 def home():
-
     return render_template('index.html', params=params)
 
+#this is the flask for textchat aka chatbot 
 @app.route("/textchat")
 def textchat():
     return render_template('textchat.html', params=params)
+#this is for getting the inputs from the chatbot and running the same through the model
 @app.route("/textchat/get")
 def get_bot_response():
     userText = request.args.get('msg')
@@ -59,7 +50,7 @@ def get_bot_response():
 
 
 #for signup page aka dashboard
-#inorder to get values from the html file adde the name thing in the form section so that value can be retrieved
+#this is the route for the dashboard page for editing and customizing the data
 @app.route("/dashboard", methods=["GET","POST"])
 def dashboard():
     if request.method=="POST":
@@ -97,7 +88,7 @@ def get_bot_response2():
 
 
 
-#this is for deleteing the post 
+#this is for logging out of the signin page 
 @app.route('/logout')
 def logout():
     session.pop('user')
@@ -105,7 +96,7 @@ def logout():
 
 
 
-#this is for about button on navibar
+#this is for about button on navibar just for info purpose
 @app.route("/about")
 def about():
     return render_template('about.html',params=params)

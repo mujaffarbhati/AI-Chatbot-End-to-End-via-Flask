@@ -17,9 +17,11 @@ Bootstrap is used for frontend development
 <li> Choose the appropriate bot model from the html file since there are 2 sub usage of the model - Chatbot and Voicebot. <br>
 <li> Append the Chosen Html file in your code and select your code of need from the backend.py file where Flask is being used.
 <li> In main.py uncomment the pickle creating code while commenting the rest of the code to form the pickle of the model and tokenizer, (1.4GB approx)
+<li> The config.json file contains the parameters of the project.
   
 # Additional features / Conclusion
 <li> The additional features that could be added in the module is allowing the admin to choose the layout of the chatbot from the dashboard itself. 
+<li> Database is pre-connected for the users if they want to connect the database to the project.
 <li> Roberta model from transformers library could be used to further optimize the model.
 <li> Open to suggestions. Feel free to pull the repository for your need.
 

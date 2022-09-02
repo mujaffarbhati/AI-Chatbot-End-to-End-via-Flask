@@ -1,5 +1,5 @@
 # AI-Chatbot
-Chatbot made via NLP  for Question - Answering purposes as of a support assistant of websites. <br>
+Chatbot made via NLP  for Question - Answering purposes as of being a 24x7 support assistant of websites. <br>
 Bert model from the transformers library is used since its a pretrained model. <br>
 The project is made end to end via flask providing both chatbot as well as voicebot depending on the use of the user as well as an additional admin section is added to manage and customize the data on the users need.
 

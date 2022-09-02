@@ -4,13 +4,11 @@
         "local_uri":"mysql://root:@127.0.0.1/blogtest",
         "prod_uri":"mysql://root:@127.0.0.1/blogtest",
         "blog_name":"Chatbot Developed By Autobots",
-        "no_of_posts":2,
         "admin_user":"test",
         "admin_password":"ezpzbabes",
         "upload_location":"C:\\Users\\Asus\\Desktop\\Python stuffs\\Flash\\static",
         "twitter_link":"#",
         "facebook_link":"#",
-        "github_link":"#",
-        "login_image":"logo.svg"
+        "github_link":"#"
     }
 }
